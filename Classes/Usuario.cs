@@ -1,6 +1,9 @@
 namespace Senai.Exercicio.Pizzaria.Classes {
     public class Usuario : Entidade {
-
+        /// <summary>
+        /// [Encapsulado]
+        /// </summary>
+        /// <value>O Valor apenas é aceito quando contem os caracteres '@' e '.'</value>
         public string Email {
             get {
                 return Email;
@@ -15,6 +18,10 @@ namespace Senai.Exercicio.Pizzaria.Classes {
                 }
             }
         }
+        /// <summary>
+        /// [Encapsulado]
+        /// </summary>
+        /// <value>O Valor apenas é aceito quando contem mais de 6 caracteres</value>
         public string Senha {
             get {
                 return Senha;

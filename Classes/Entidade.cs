@@ -1,6 +1,17 @@
 namespace Senai.Exercicio.Pizzaria.Classes {
     public abstract class Entidade {
-        public int ID;
+        /// <summary>
+        /// [Encapsulado]
+        /// </summary>
+        /// <value>Retorna o ID do objeto somado mais um</value>
+        public int ID {
+            get {
+                return ID +1;
+            }
+            set{
+                ID = value;
+            }
+        }
         public string Nome;
         protected string DataCriacao;
         /// <summary>
