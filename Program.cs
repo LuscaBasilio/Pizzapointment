@@ -17,26 +17,22 @@ namespace Senai.Exercicio.Pizzaria
                     Console.WriteLine("[1] Cadastrar usuario\n[2] Efetuar login\n[3] Listar Usuarios\n[9] Sair\n");        
                     sbyte.TryParse(Console.ReadLine(),out escolha);
                     switch(escolha){
-                        case 1:
+                        case 1://   Cadastrar Usuario   //
                             int tamanho = Database.usuarios.Length-1;
                             Database.CadastrarUsuario(tamanho);
                             Array.Resize(ref Database.usuarios,tamanho+1);
                             break;
-                        case 2:
+                        case 2://   Efetuar Login   //
                             Database.EfetuarLogin();
                         break;
-                        case 3:
-                            /* 
-                            Um loop (foreach provavelmente)
-                            onde provavelmente pega todos os usuarios e mostra o seu id e nome 
-                            Caso o objeto (usuario) seja nulo , ele não faz nada mas continua o loop até o final 
-                            */
+                        case 3://   Listar usuario  //
+                            Database.ListarUsuario();
                             break;
-                        case 9:
+                        case 9://   Fechar      //
                             Design.MensagemInstrucao("Aperte qualquer tecla para sair");
                             Console.ReadKey();
                             continue;
-                        default:
+                        default://  Exceção     //
                             Design.MensagemErro("Por favor insira um dos 4 valores");
                             break;
                     }

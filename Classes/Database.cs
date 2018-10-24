@@ -183,11 +183,16 @@ namespace Senai.Exercicio.Pizzaria.Classes
                 }
             }
             /// <summary>
-            /// 
+            /// Mostra todos os usuarios no banco de dados
             /// </summary>
-            /// <param name="id"></param>
-            public static void ListarUsuario(int id){
-
+            public static void ListarUsuario(){
+                foreach (Usuario item in usuarios){
+                    if(item!= null){
+                        Console.WriteLine($"[{item.ID}] -> {Database.usuarios[item.ID-1].Nome}");
+                    }else{
+                        Console.WriteLine("-> Não existe usuario com esse ID");
+                    }
+                }
             }
             #endregion Metodos
         #endregion Usuario

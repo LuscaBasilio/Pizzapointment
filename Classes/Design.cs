@@ -12,7 +12,7 @@ namespace Senai.Exercicio.Pizzaria.Classes {
         /// <summary>
         /// Usado para mostrar uma mensagem de instrução entre 3 traços.  
         /// Exemplo :  
-        /// \*--Texto--*
+        /// \*-- Texto --*
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida entre os *-- --*</param>
         public static void MensagemInstrucao(string mensagem) {
