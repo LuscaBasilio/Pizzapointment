@@ -681,23 +681,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\debaal\\.nuget\\packages\\": {},
+    "C:\\Users\\fic\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\o\\Jogos\\Outros\\Meus Projetos\\Sistemas\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
+      "projectUniqueName": "c:\\Users\\fic\\Documents\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
       "projectName": "Senai.Exercicio.Pizzaria",
-      "projectPath": "f:\\o\\Jogos\\Outros\\Meus Projetos\\Sistemas\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
-      "packagesPath": "C:\\Users\\debaal\\.nuget\\packages\\",
-      "outputPath": "f:\\o\\Jogos\\Outros\\Meus Projetos\\Sistemas\\Pizzapointment\\obj\\",
+      "projectPath": "c:\\Users\\fic\\Documents\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
+      "packagesPath": "C:\\Users\\fic\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\fic\\Documents\\Pizzapointment\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\debaal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fic\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

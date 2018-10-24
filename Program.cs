@@ -44,10 +44,13 @@ namespace Senai.Exercicio.Pizzaria
                     Console.WriteLine("O que deseja fazer agora?");   
                     Console.WriteLine("[1] Cadastrar produto\n[2] Listar produto\n[3] Exibir total\n[4] Maior preço\n[5] Menor preço\n[6] Alterar preço\n[9] Fazer Logoff");
                     switch(escolha){
-                        case 1://   Cadastrar Produto//
+                        case 1:
                             // cria uma variavel com o tamanho do database dos produtos menos 1.
+                            int tamanhoProduto = Database.produto.Length-1;
                             // chama um metodo (cadastrar produto)
-                            // aumenta a array usando a variavel de tamanho mais um 
+                            Database.CadastrarProduto(tamanhoProduto);
+                            // aumenta a array usando a variavel de tamanho mais um
+                            Array.Resize(ref Database.produto,tamanhoProduto+1); 
                             break;
                         case 2://   Listar Produto(s)//
                             /*
