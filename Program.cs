@@ -64,11 +64,10 @@ namespace Senai.Exercicio.Pizzaria
                                             Design.MensagemInstrucao("Digite o ID do produto , Ou digite 0 para sair");
                                             int.TryParse(Console.ReadLine(),out esc);
                                             
-                                            switch (esc)
-                                            {
+                                            switch (esc){
                                                 case 0:
-                                                    continue;
-                                                
+                                                    //nada
+                                                    continue;                                               
                                                 default:
                                                     if(esc>0){
                                                         if(esc>=Database.produto.Length){
@@ -84,8 +83,10 @@ namespace Senai.Exercicio.Pizzaria
                                         }while(esc!=0);
                                         break;
                                     case 3://           Sair            //
-                                        break;
+                                        //nada
+                                        continue;
                                     default:
+                                        Design.MensagemErro("Por favor insira um dos 3 valores");
                                         break;
                                 }
 
@@ -108,8 +109,10 @@ namespace Senai.Exercicio.Pizzaria
                             break;
                         case 9://   Logoff          //
                             Database.Logoff();
-                            escolha =0 ;
+                            escolha = 0 ;
                             continue;
+                        default:
+                            break;
                     }
                 }
 
