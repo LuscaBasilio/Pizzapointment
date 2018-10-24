@@ -10,17 +10,26 @@ namespace Senai.Exercicio.Pizzaria.Classes {
             Console.WriteLine ($"{mensagem}");
         }
         /// <summary>
-        /// Usado para mostrar uma mensagem de instrução
+        /// Usado para mostrar uma mensagem de instrução entre 3 traços.  
+        /// Exemplo :  
+        /// \*--Texto--*
         /// </summary>
-        /// <param name="mensagem">Mensagem que será exibida</param>
-        public static void Instrucao(string mensagem) {
-            Console.WriteLine ($"{mensagem}");
+        /// <param name="mensagem">Mensagem que será exibida entre os *-- --*</param>
+        public static void MensagemInstrucao(string mensagem) {
+            Console.WriteLine ($"*-- { mensagem } --*");
         }
         /// <summary>
         /// Usado para mostar uma mensagem de sucesso
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida</param>
         public static void MensagemSucesso(string mensagem) {
+            Console.WriteLine ($"{mensagem}");
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mensagem">Mensagem que será exibida</param>
+        public static void Titulo(string mensagem){
             Console.WriteLine ($"{mensagem}");
         }
     }
