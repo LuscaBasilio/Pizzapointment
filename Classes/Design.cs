@@ -32,5 +32,15 @@ namespace Senai.Exercicio.Pizzaria.Classes {
         public static void Titulo(string mensagem){
             Console.WriteLine ($"{mensagem}");
         }
+        /// <summary>
+        /// Pode ser usado sem depender do metodo Database.ListarTodos
+        /// Procura um produto/usuario no banco de dados fornecido e mostra o ID e o nome.  
+        /// se ele não existir , mostra que não há produto/usuario no ID inserido.
+        /// </summary>
+        /// <param name="id">Parametro inserido pelo usuario , define qual produto/usuario será procurado</param>
+        /// <param name="database">database onde será procurado a produto/usuario</param>
+        public static void Listar(int id,Entidade[] database){               
+            Console.WriteLine($"--> [{id}] : {database[id-1].Nome}");
+        }
     }
 }

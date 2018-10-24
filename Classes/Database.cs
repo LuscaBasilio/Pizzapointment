@@ -76,7 +76,7 @@ namespace Senai.Exercicio.Pizzaria.Classes
                 /// <summary>
                 /// Altera o preço do produto no id dado como parametro
                 /// </summary>
-                /// <param name="id">Parametro insrido pelo usuario , define qual produto tera o valor alterado</param>
+                /// <param name="id">Parametro inserido pelo usuario , define qual produto tera o valor alterado</param>
                 public static void AlterarPreco(int id){
 
                 }
@@ -102,7 +102,7 @@ namespace Senai.Exercicio.Pizzaria.Classes
             /// O Usuario deve conter um email com @ e .  
             /// A senha do usuario deve conter mais do que 6 caracteres
             /// </summary>
-            /// <param name="id">Posição do usuario no vetor somada mais 1</param>
+            /// <param name="id">Posição do usuario no vetor somada mas 1</param>
             public static void CadastrarUsuario(int id){
                 usuarios[id].ID = id;//seta o id do cadastro igual ao inserido pelo usuario
 
@@ -182,20 +182,28 @@ namespace Senai.Exercicio.Pizzaria.Classes
                     break;
                 }
             }
-            /// <summary>
-            /// Mostra todos os usuarios no banco de dados
-            /// </summary>
-            public static void ListarUsuario(){
-                foreach (Usuario item in usuarios){
-                    if(item!= null){
-                        Console.WriteLine($"[{item.ID}] -> {Database.usuarios[item.ID-1].Nome}");
-                    }else{
-                        Console.WriteLine("-> Não existe usuario com esse ID");
-                    }
-                }
-            }
             #endregion Metodos
         #endregion Usuario
+
+        #region Ambos
+
+            /// <summary>
+            /// Percorre toda a array inseria pelo usuario e usa o metodo Design.Listar para mostrar resultados
+            /// </summary>
+            /// <param name="database"></param>
+            /// <param name="valor">tipo do produto/usuario a ser mostrada</param>
+            public static void ListarTodos(Entidade[] database,string valor = "entidade"){
+                foreach (Entidade item in database)
+                {
+                    if(item != null){
+                        Design.Listar(item.ID,database);
+                    }
+                    else{
+                        Design.MensagemErro($"Não existe {valor} nesse ID");
+                    }
+                }                
+            }
+        #endregion
 
         #region Stream
         

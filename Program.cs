@@ -26,7 +26,7 @@ namespace Senai.Exercicio.Pizzaria
                             Database.EfetuarLogin();
                         break;
                         case 3://   Listar usuario  //
-                            Database.ListarUsuario();
+                            Database.ListarTodos(Database.usuarios,"usuario");                           
                             break;
                         case 9://   Fechar      //
                             Design.MensagemInstrucao("Aperte qualquer tecla para sair");
@@ -35,6 +35,7 @@ namespace Senai.Exercicio.Pizzaria
                         default://  Exceção     //
                             Design.MensagemErro("Por favor insira um dos 4 valores");
                             break;
+                            
                     }
                 }else{
                     Console.WriteLine("O que deseja fazer agora?");   
@@ -46,15 +47,49 @@ namespace Senai.Exercicio.Pizzaria
                             // aumenta a array usando a variavel de tamanho mais um 
                             break;
                         case 2://   Listar Produto(s)//
-                            /*
-                            ---Ele poderar escolher entre as seguintes opções---
-                            1 - Todos
-                            2 - Um unico produto (depois será pedido a ID (usando o getID) do mesmo) <- ficará no loop até inserir o valor 0
-                            3 - Sair
+                            sbyte esx;
+                            do{//escolher opções
+                                Design.MensagemInstrucao("O que você deseja fazer agora?");
+                                Console.WriteLine("[1] Listar todos os produtos\n[2] Listar um produto especifico\n[3] Sair");
+                                sbyte.TryParse(Console.ReadLine(),out esx);
 
-                            ---Exceções---
-                                - Inserir um valor menor do que 0 ou maior que 3
-                             */
+                                switch (esx)
+                                {
+                                    case 1://   Todos os produtos       //                                        
+                                        Database.ListarTodos(Database.produto,"produto");
+                                        break;
+                                    case 2://   Um produto especifico   //
+                                        int esc;
+                                        do{
+                                            Design.MensagemInstrucao("Digite o ID do produto , Ou digite 0 para sair");
+                                            int.TryParse(Console.ReadLine(),out esc);
+                                            
+                                            switch (esc)
+                                            {
+                                                case 0:
+                                                    continue;
+                                                
+                                                default:
+                                                    if(esc>0){
+                                                        if(esc>=Database.produto.Length){
+                                                            Design.Listar(esc,Database.produto);
+                                                        }else{
+                                                            Design.MensagemErro("Não insira valores fora do banco de dados");
+                                                        }
+                                                    }else{
+                                                        Design.MensagemErro("Não insira valores negativos");
+                                                    }
+                                                    break;
+                                            }
+                                        }while(esc!=0);
+                                        break;
+                                    case 3://           Sair            //
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                            }while(esx!=3);
                             break;
                         case 3://   Exibir Total    //
                             //chama um metodo (ExibirTotal)
@@ -73,7 +108,8 @@ namespace Senai.Exercicio.Pizzaria
                             break;
                         case 9://   Logoff          //
                             Database.Logoff();
-                            break;
+                            escolha =0 ;
+                            continue;
                     }
                 }
 
