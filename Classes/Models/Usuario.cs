@@ -1,4 +1,4 @@
-namespace Senai.Exercicio.Pizzaria.Classes {
+namespace Senai.Exercicio.Pizzaria.Classes.Models {
     public class Usuario : Entidade {
         /// <summary>
         /// [Encapsulado]

@@ -1,7 +1,13 @@
 using System;
 using System.IO;
 using System.Text;
+using Senai.Exercicio.Pizzaria.Classes.Utilidades;
+using Senai.Exercicio.Pizzaria.Classes.Models;
 namespace Senai.Exercicio.Pizzaria.Classes {
+    /// <summary>
+    /// Banco de dados onde são armazenados os produtos e os usuarios.  
+    /// Toda alteração no programa é feita por aqui.
+    /// </summary>
     public static class Database {
         #region Produto
         #region Variaveis
@@ -36,9 +42,11 @@ namespace Senai.Exercicio.Pizzaria.Classes {
             
             Design.MensagemInstrucao ("Indique a qual categoria o produto pertence");
             produto[id].Categoria = SetCategoria();
-            
-            Design.MensagemSucesso($"Produto {produto[id].Nome} registrado com sucesso no id {id}!");
 
+            produto[id].SetData(DateTime.Now);
+
+            Design.MensagemSucesso($"Produto {produto[id].Nome} registrado com sucesso no id {id}!");
+        
         }
         /// <summary>
         /// Pede dados ao usuario e só sai do loop caso ele insira um valor correto (numero inteiro)
@@ -70,14 +78,35 @@ namespace Senai.Exercicio.Pizzaria.Classes {
         /// Define o total do custo de todos os produtos no banco de dados
         /// </summary>
         public static void ExibirTotal () {
-
+            double total = 0;
+            foreach (Produto item in produto)
+            {
+                if(item!=null)
+                    total += item.Preco;
+                else
+                    continue;
+            }
         }
         /// <summary>
         /// Procura o maior valor e armazena o seu id em uma variavel temporaria na qual será o retorno desse metodo.
         /// </summary>
         /// <returns>Retorna o ID do produto com o maior preço</returns>
         public static int MaiorPreco () {
-            return 0;
+            double preco = 0;
+            int id = -1;
+            foreach (Produto item in produto)
+            {
+                if(item!=null){
+                    if(item.Preco > preco){
+                        preco = item.Preco;
+                        id =  item.ID;
+                    }else{
+                        continue;
+                    }
+                }
+                
+            }
+            return id;
         }
         /// <summary>
         /// Procura o menor valor e armazena o seu id em uma variavel temporaria na qual será o retorno desse metodo.  
@@ -85,14 +114,34 @@ namespace Senai.Exercicio.Pizzaria.Classes {
         /// </summary>
         /// <returns>Retorna o ID do produto com o menor preço</returns>
         public static int MenorPreco () {
-            return 0;
+            double preco = produto[MaiorPreco()].Preco;
+            int id = MaiorPreco();
+            foreach (Produto item in produto)
+            {
+                if(item!=null){
+                    if(item.Preco < preco){
+                        preco = item.Preco;
+                        id =  item.ID;
+                    }else{
+                        continue;
+                    }
+                }
+                
+            }
+            return id;
         }
         /// <summary>
         /// Altera o preço do produto no id dado como parametro
         /// </summary>
         /// <param name="id">Parametro insrido pelo usuario , define qual produto tera o valor alterado</param>
-        public static void AlterarPreco (int id) {
+        public static void AlterarPreco (int id) {       
+            double valorAntigo = produto[id-1].Preco;
+            do{
+                Design.MensagemInstrucao($"Digite o novo valor para o produto {produto[id-1].Nome}");
+                double.TryParse(Console.ReadLine(), out produto[id-1].Preco);
+            }while(produto[id-1].Preco == null);
 
+            Design.MensagemSucesso($"O Preço do produto {produto[id-1]} foi alterado de R${valorAntigo} para {produto[id-1].Preco}");
         }
         #endregion Metodos
         #endregion Produto
@@ -163,7 +212,7 @@ namespace Senai.Exercicio.Pizzaria.Classes {
                         Design.MensagemErro ("Maximo de tentativas atingido.");
                         break;
                     } else {
-                        if (usuarioLogado != null) {
+                        if (usuarioLogado == null) {
                             usuarioLogado = item;
                         } else {
                             Design.MensagemErro ("Você ja está logado.");
@@ -171,11 +220,12 @@ namespace Senai.Exercicio.Pizzaria.Classes {
                         }
                         break;
                     }
+                    break;
                 }
             }
         }
         /// <summary>
-        /// Desloga o usuario caso o mesmo esteja logado
+        /// Desloga o usuario caso esteja logado
         /// </summary>
         public static void Logoff () {
             Design.MensagemInstrucao ("Deseja deslogar?");
@@ -202,7 +252,7 @@ namespace Senai.Exercicio.Pizzaria.Classes {
         #region Ambos
 
             /// <summary>
-            /// Percorre toda a array inseria pelo usuario e usa o metodo Design.Listar para mostrar resultados
+            /// Percorre toda a array inserida pelo usuario e usa o metodo Design.Listar para mostrar resultados
             /// </summary>
             /// <param name="database"></param>
             /// <param name="valor">tipo do produto/usuario a ser mostrada</param>

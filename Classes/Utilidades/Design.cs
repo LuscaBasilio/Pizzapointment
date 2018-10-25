@@ -1,6 +1,9 @@
 using System;
 using System.Text;
-namespace Senai.Exercicio.Pizzaria.Classes {
+namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
+    /// <summary>
+    /// Classe onde contem todas as estilizações do programa
+    /// </summary>
     public static class Design {
         /// <summary>
         /// Usado para Mostrar uma mensagem de erro
@@ -26,21 +29,34 @@ namespace Senai.Exercicio.Pizzaria.Classes {
             Console.WriteLine ($"{mensagem}");
         }
         /// <summary>
-        /// 
+        /// Mostra uma mensagem que será exibida entre --- e entre 2 linhas de ---  
+        /// Exemplo :
+        /// ---------------
+        /// ---- Texto ----
+        /// ---------------
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida</param>
         public static void Titulo(string mensagem){
-            Console.WriteLine ($"{mensagem}");
+            Console.WriteLine ($"{new string('-',mensagem.Length+4)}\n---- {mensagem} ----\n{new string('-',mensagem.Length+4)}");
         }
         /// <summary>
         /// Pode ser usado sem depender do metodo Database.ListarTodos
         /// Procura um produto/usuario no banco de dados fornecido e mostra o ID e o nome.  
-        /// se ele não existir , mostra que não há produto/usuario no ID inserido.
+        /// Caso seja um produto ele mostra sua descrição , caso seja um usuario ,seu email.
         /// </summary>
         /// <param name="id">Parametro inserido pelo usuario , define qual produto/usuario será procurado</param>
         /// <param name="database">database onde será procurado a produto/usuario</param>
         public static void Listar(int id,Entidade[] database){               
             Console.WriteLine($"--> [{id}] : {database[id-1].Nome}");
+            try
+            {
+                Console.WriteLine($"{database[id].Descricao}");
+            }
+            catch (System.Exception e)
+            {
+                Console.Write($" {database[id].Email}");
+                throw;
+            }            
         }
     }
 }
