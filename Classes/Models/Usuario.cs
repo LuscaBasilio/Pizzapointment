@@ -9,14 +9,14 @@ namespace Senai.Exercicio.Pizzaria.Classes.Models {
         /// <value>O Valor apenas é aceito quando contem os caracteres '@' e '.'</value>
         public string Email {
             get {
-                return Email;
+                return email;
             }
 
             set {
                 if (value.Contains ('@') && value.Contains ('.')) {
-                    email = value;
+                    email = value.ToLower();
                 } else {
-                    Design.MensagemErro ("Email invalido"); //ARRUMA SABOSTA
+                    Design.MensagemErro ("Email invalido , insira-o corretamente por favor"); //ARRUMA SABOSTA
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Models {
                 if (value.Length > 6) {
                     senha = value;
                 } else {
-                    Design.MensagemErro ("Senha invalida (contém menos de 6 caracteres)");
+                    Design.MensagemErro ("Senha invalida as senhas devem contém mais de 6 caracteres");
                 }
             }
         }

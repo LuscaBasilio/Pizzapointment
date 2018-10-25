@@ -22,21 +22,20 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
         /// <returns>Retrna true se o usuario selecionar a opção 9 (Sair)</returns>
         public static bool Deslogado(){
             Design.Titulo("PIZZAPOINTMENT");
-            Console.WriteLine("");
 
             sbyte escolha = 0 ;
             bool sair = false;
             // se o usuario não estiver logado 
-            do{              
+            do{       
+                Console.WriteLine("");       
                 Design.MensagemInstrucao("O que deseja fazer?");
                 Console.WriteLine("[1] Cadastrar usuario\n[2] Efetuar login\n[3] Listar Usuarios\n[9] Sair\n");        
                 sbyte.TryParse(Console.ReadLine(),out escolha);
                 switch(escolha){
                     case 1://   Cadastrar Usuario   //
                         int tamanho = Database.usuarios.Length-1;
-                        System.Console.WriteLine("1");
                         Database.CadastrarUsuario(tamanho);
-                        Array.Resize(ref Database.usuarios,tamanho+1);
+                        Array.Resize(ref Database.usuarios,tamanho+2);
                         break;
                     case 2://   Efetuar Login   //
                         Database.EfetuarLogin();

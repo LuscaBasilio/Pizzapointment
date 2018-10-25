@@ -9,10 +9,11 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
     public static class Design {
         /// <summary>
         /// Usado para Mostrar uma mensagem de erro
+        /// Pula uma linha e mostra a mensagem
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida</param>
         public static void MensagemErro (string mensagem) {
-            Console.WriteLine ($"{mensagem}");
+            Console.WriteLine ($"\n{mensagem}");
         }
         /// <summary>
         /// Usado para mostrar uma mensagem de instrução. 
@@ -26,7 +27,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida</param>
         public static void MensagemSucesso(string mensagem) {
-            Console.WriteLine ($"{mensagem}");
+            Console.WriteLine ($"\n{mensagem}");
         }
         /// <summary>
         /// Mostra uma mensagem que será exibida entre --- e entre 2 linhas de ---  

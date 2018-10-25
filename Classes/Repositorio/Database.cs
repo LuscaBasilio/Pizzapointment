@@ -27,9 +27,9 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         /// </summary>
         ///<param name="id">Posição do usuario no vetor</param>
         public static void CadastrarProduto (int id) {
-            produto[id] = new Produto () {
-                ID = id
-            };
+            produto[id] = new Produto ();
+            produto[id].ID = id;
+            
             Design.MensagemInstrucao ("Insira o nome do produto");
             produto[id].Nome = Console.ReadLine ();
             do {
@@ -44,7 +44,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
             Design.MensagemInstrucao ("Indique a qual categoria o produto pertence");
             produto[id].Categoria = SetCategoria();
 
-            produto[id].SetData(DateTime.Now);
+            produto[id].DataCriacao =  DateTime.Now.Date.ToString();
 
             Design.MensagemSucesso($"Produto {produto[id].Nome} registrado com sucesso no id {id}!");
         
@@ -168,28 +168,28 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         /// A senha do usuario deve conter mais do que 6 caracteres
         /// </summary>
         /// <param name="id">Posição do usuario no vetor somada mais 1</param>
-        public static void CadastrarUsuario (int id) {
-            System.Console.WriteLine("2");
+        public static void CadastrarUsuario (int id) {           
             usuarios[id] = new Usuario ();
             usuarios[id].ID = id; //seta o id do cadastro igual ao inserido pelo usuario
 
-            System.Console.WriteLine("3");
             Design.MensagemInstrucao ("Insira o seu nome");
             usuarios[id].Nome = Console.ReadLine ();
             //  LOOP EMAIL
             Design.MensagemInstrucao ("Insira um email (Ex: email@provedor.com)");
             do {
                 usuarios[id].Email = Console.ReadLine ();
-            } while (usuarios[id].Email != null);
+            } while (usuarios[id].Email == null);
             //  LOOP SENHA
-            Design.MensagemInstrucao ("Insira uma email");
+            Design.MensagemInstrucao ("Insira uma senha");
             do {
                 usuarios[id].Senha = Console.ReadLine ();
-            } while (usuarios[id].Senha != null);
+            } while (usuarios[id].Senha == null);
             //  Data de criação
-            usuarios[id].SetData (DateTime.Now);
+            usuarios[id].DataCriacao =  DateTime.Now.ToShortDateString();
 
-            Design.MensagemSucesso ($"Usuario {usuarios[id].Nome} cadastrado com sucesso no id {id}");
+            RegistrarUsuario(usuarios[id]);
+
+            Design.MensagemSucesso ($"Usuario {usuarios[id].Nome} cadastrado com sucesso no id {id}");       
         }
         /// <summary>
         /// Metodo no qual pede os dados e verifica se o mesmo está cadastrado no banco de dados.
@@ -260,21 +260,60 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
             /// <param name="database"></param>
             /// <param name="valor">tipo do produto/usuario a ser mostrada</param>
             public static void ListarTodos(Entidade[] database,string valor = "entidade"){
-                foreach (Entidade item in database)
-                {
-                    if(item != null){
-                        Design.Listar(item.ID,database);
+                if(database[0] != null){
+                    foreach (Entidade item in database)
+                    {
+                        if(item != null){
+                            Design.Listar(item.ID,database);
+                        }
+                        else{
+                            Design.MensagemErro($"Não existe {valor} nesse ID");
+                        }
                     }
-                    else{
-                        Design.MensagemErro($"Não existe {valor} nesse ID");
-                    }
-                }                
+                }else{
+                    Design.MensagemErro("O banco de dados está vazio");
+                }            
             }
         #endregion
 
-
         #region Stream
+            public static StreamWriter usuarioDB = new StreamWriter("UsuarioDB.txt");
 
+            /// <summary>
+            /// Abra o arquivo UsuarioDB.txt e adiciona informações do usuario lá 
+            /// Separados por espaço , uma linha para cada usuario
+            /// </summary>
+            /// <param name="item"></param>
+            private static void RegistrarUsuario(Usuario item) => usuarioDB.WriteLine($"{item.ID}#{item.Nome}#{item.Email}#{item.Senha}#{item.DataCriacao}");
+            
+            /// <summary>
+            /// Percorre cada linha do arquivo .txt , e a divide em uma array de string sendo :  
+            /// index 0 : ID  
+            /// index 1 : Nome  
+            /// index 2 : Email  
+            /// index 3 : Senha  
+            /// index 4 : Data de criação
+            /// </summary>
+            /// <returns>Retorna um database importado de um arquivo .txt</returns>
+            public static Usuario[] CarregarUsuarios(){
+                Usuario[] NovoDatabase = new Usuario[1]{null};
+                StreamReader usuarioDB_ = new StreamReader("UsuarioDB.txt");
+                int contador = 0;
+                while(!usuarioDB_.EndOfStream){
+                    string linha = usuarioDB_.ReadLine();
+                    if(linha !=null){
+                        string[] valores = linha.Split('#',5);
+                        NovoDatabase[contador] = new Usuario();
+                        NovoDatabase[contador].ID = int.Parse(valores[0]);
+                        NovoDatabase[contador].Nome = valores[1];
+                        NovoDatabase[contador].Email = valores[2];
+                        NovoDatabase[contador].Senha = valores[3];
+                        NovoDatabase[contador].DataCriacao = valores[4];
+                    }
+                }
+                usuarioDB_.Close();
+                return NovoDatabase;
+            }
         #endregion Stream
     }
 }

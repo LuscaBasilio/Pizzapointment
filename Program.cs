@@ -6,7 +6,10 @@ namespace Senai.Exercicio.Pizzaria
 {
     class Program
     {
-        static void Main(string[] args){           
+        static void Main(string[] args){ 
+            
+            Database.usuarios = Database.CarregarUsuarios();
+
             bool sair = false;
             
             do{                  
@@ -16,10 +19,9 @@ namespace Senai.Exercicio.Pizzaria
                     Menu.Logado();
                 }
 
-            }while(sair == false && Database.usuarioLogado == null);
+            }while(sair == false);
 
-            Design.MensagemSucesso("Aperte qualquer tecla para sair");
-            Console.ReadKey();                    
+            Database.usuarioDB.Close();           
         }
 
     }
