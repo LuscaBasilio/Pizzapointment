@@ -681,23 +681,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\47326175810\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\fic\\.nuget\\packages\\": {},
+>>>>>>> Ederson
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "c:\\Users\\47326175810\\desktop\\Sprint 3\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
       "projectName": "Senai.Exercicio.Pizzaria",
       "projectPath": "c:\\Users\\47326175810\\desktop\\Sprint 3\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
       "packagesPath": "C:\\Users\\47326175810\\.nuget\\packages\\",
       "outputPath": "c:\\Users\\47326175810\\desktop\\Sprint 3\\Pizzapointment\\obj\\",
+=======
+      "projectUniqueName": "c:\\Users\\fic\\Documents\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
+      "projectName": "Senai.Exercicio.Pizzaria",
+      "projectPath": "c:\\Users\\fic\\Documents\\Pizzapointment\\Senai.Exercicio.Pizzaria.csproj",
+      "packagesPath": "C:\\Users\\fic\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\fic\\Documents\\Pizzapointment\\obj\\",
+>>>>>>> Ederson
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\47326175810\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\fic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Ederson
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
