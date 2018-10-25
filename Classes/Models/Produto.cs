@@ -17,7 +17,6 @@ namespace Senai.Exercicio.Pizzaria.Classes.Models
             set{
                 if(value>0){
                     Senai.Exercicio.Pizzaria.Classes.Utilidades.Design.MensagemErro("O Preoço do produto não pode ser igual ou menor do que 0");
-                    Preco = null;
                 }else{
                     Preco = value;
                 }

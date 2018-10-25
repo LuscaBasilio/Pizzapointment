@@ -1,5 +1,5 @@
 ﻿using System;
-using Pizzapointment.Classes.Utilidades;
+using Senai.Exercicio.Pizzaria.Classes.Repositorio;
 using Senai.Exercicio.Pizzaria.Classes.Utilidades;
 
 namespace Senai.Exercicio.Pizzaria

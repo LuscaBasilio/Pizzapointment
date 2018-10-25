@@ -1,3 +1,5 @@
+using Senai.Exercicio.Pizzaria.Classes.Utilidades;
+
 namespace Senai.Exercicio.Pizzaria.Classes.Models {
     public class Usuario : Entidade {
         /// <summary>

@@ -1,8 +1,9 @@
 using System;
 using Senai.Exercicio.Pizzaria.Classes;
+using Senai.Exercicio.Pizzaria.Classes.Repositorio;
 using Senai.Exercicio.Pizzaria.Classes.Utilidades;
 
-namespace Pizzapointment.Classes.Utilidades
+namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
 {
     /// <summary>
     /// Classe onde tem toda interface do programa
@@ -69,9 +70,11 @@ namespace Pizzapointment.Classes.Utilidades
         /// Qualquer outro é invalido
         /// </summary>
         public static void Logado(){
+            sbyte escolha;
+            sbyte.TryParse(Console.ReadLine(),out escolha);
             Console.WriteLine("O que deseja fazer agora?");   
             Console.WriteLine("[1] Cadastrar produto\n[2] Listar produto\n[3] Exibir total\n[4] Maior preço\n[5] Menor preço\n[6] Alterar preço\n[9] Fazer Logoff");
-             switch(escolha){
+            switch(escolha){
                 case 1://   Cadastrar Produto//
                     // cria uma variavel com o tamanho do database dos produtos menos 1.
                     int tamanhoProduto = Database.produto.Length-1;
@@ -83,27 +86,27 @@ namespace Pizzapointment.Classes.Utilidades
                 case 2://   Listar Produto(s)//
                     ListarProdutos();    
                     break;
-            case 3://   Exibir Total    //
-                Database.ExibirTotal();
-                break;
-            case 4://   Maior Preço     //
-                Database.MaiorPreco();
-                break;
-            case 5://   Menor Preço     //
-                Database.MenorPreco();
-                break;
-            case 6://   Alterar Preço   //
-                int id;
-                Design.MensagemInstrucao("Insira o ID do produto que você deseja alterar o valor");
-                int.TryParse(Console.ReadLine(),out id);
-                Database.AlterarPreco(id);
-                break;
-            case 9://   Logoff          //
-                Database.Logoff();
-                escolha = 0 ;
-                continue;
-            default:
-                break;
+                case 3://   Exibir Total    //
+                    Database.ExibirTotal();
+                    break;
+                case 4://   Maior Preço     //
+                    Database.MaiorPreco();
+                    break;
+                case 5://   Menor Preço     //
+                    Database.MenorPreco();
+                    break;
+                case 6://   Alterar Preço   //
+                    int id;
+                    Design.MensagemInstrucao("Insira o ID do produto que você deseja alterar o valor");
+                    int.TryParse(Console.ReadLine(),out id);
+                    Database.AlterarPreco(id);
+                    break;
+                case 9://   Logoff          //
+                    Database.Logoff();
+                    escolha = 0 ;
+                    break;
+                default:
+                    break;
             }
         }
         /// <summary>

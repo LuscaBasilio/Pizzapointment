@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using Senai.Exercicio.Pizzaria.Classes.Utilidades;
 using Senai.Exercicio.Pizzaria.Classes.Models;
-namespace Senai.Exercicio.Pizzaria.Classes {
+namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
     /// <summary>
     /// Banco de dados onde são armazenados os produtos e os usuarios.  
     /// Toda alteração no programa é feita por aqui.
@@ -34,7 +34,8 @@ namespace Senai.Exercicio.Pizzaria.Classes {
             produto[id].Nome = Console.ReadLine ();
             do {
                 Design.MensagemInstrucao ("Insira o preço do produto");
-                double.TryParse (Console.ReadLine (), out produto[id].Preco);
+                double.TryParse (Console.ReadLine (), out double preco);
+                produto[id].Preco = preco;
             } while (produto[id].Preco <= 0);
 
             Design.MensagemInstrucao ("Insira a descrição do produto");
@@ -138,8 +139,9 @@ namespace Senai.Exercicio.Pizzaria.Classes {
             double valorAntigo = produto[id-1].Preco;
             do{
                 Design.MensagemInstrucao($"Digite o novo valor para o produto {produto[id-1].Nome}");
-                double.TryParse(Console.ReadLine(), out produto[id-1].Preco);
-            }while(produto[id-1].Preco == null);
+                double.TryParse(Console.ReadLine(), out double preco);
+                produto[id-1].Preco = preco;
+            }while(produto[id-1].Preco <= 0);
 
             Design.MensagemSucesso($"O Preço do produto {produto[id-1]} foi alterado de R${valorAntigo} para {produto[id-1].Preco}");
         }
@@ -218,7 +220,6 @@ namespace Senai.Exercicio.Pizzaria.Classes {
                             Design.MensagemErro ("Você ja está logado.");
                             Logoff ();
                         }
-                        break;
                     }
                     break;
                 }

@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using Senai.Exercicio.Pizzaria.Classes.Models;
+
 namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
     /// <summary>
     /// Classe onde contem todas as estilizações do programa
@@ -47,16 +49,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
         /// <param name="id">Parametro inserido pelo usuario , define qual produto/usuario será procurado</param>
         /// <param name="database">database onde será procurado a produto/usuario</param>
         public static void Listar(int id,Entidade[] database){               
-            Console.WriteLine($"--> [{id}] : {database[id-1].Nome}");
-            try
-            {
-                Console.WriteLine($"{database[id].Descricao}");
-            }
-            catch (System.Exception e)
-            {
-                Console.Write($" {database[id].Email}");
-                throw;
-            }            
+            Console.WriteLine($"--> [{id}] : {database[id-1].Nome}");         
         }
     }
 }
