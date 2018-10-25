@@ -1,0 +1,11 @@
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\bin\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.deps.json
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\bin\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.runtimeconfig.json
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\bin\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.runtimeconfig.dev.json
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\bin\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.dll
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\bin\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.pdb
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\obj\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.csprojAssemblyReference.cache
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\obj\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.csproj.CoreCompileInputs.cache
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\obj\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.AssemblyInfoInputs.cache
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\obj\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.AssemblyInfo.cs
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\obj\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.dll
+C:\Users\47326175810\Desktop\Sprint 3\Pizzapointment\obj\Debug\netcoreapp2.1\Senai.Exercicio.Pizzaria.pdb

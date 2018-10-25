@@ -15,13 +15,11 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
             Console.WriteLine ($"{mensagem}");
         }
         /// <summary>
-        /// Usado para mostrar uma mensagem de instrução entre 3 traços.  
-        /// Exemplo :  
-        /// \*-- Texto --*
+        /// Usado para mostrar uma mensagem de instrução. 
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida entre os *-- --*</param>
         public static void MensagemInstrucao(string mensagem) {
-            Console.WriteLine ($"*-- { mensagem } --*");
+            Console.WriteLine ($">-- { mensagem } -->");
         }
         /// <summary>
         /// Usado para mostar uma mensagem de sucesso
@@ -39,7 +37,8 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
         /// </summary>
         /// <param name="mensagem">Mensagem que será exibida</param>
         public static void Titulo(string mensagem){
-            Console.WriteLine ($"{new string('-',mensagem.Length+4)}\n---- {mensagem} ----\n{new string('-',mensagem.Length+4)}");
+            int size = mensagem.Length+10;
+            Console.WriteLine ($"{new string('-',size)}\n---- {mensagem} ----\n{new string('-',size)}");
         }
         /// <summary>
         /// Pode ser usado sem depender do metodo Database.ListarTodos

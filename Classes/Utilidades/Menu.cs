@@ -34,6 +34,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
                 switch(escolha){
                     case 1://   Cadastrar Usuario   //
                         int tamanho = Database.usuarios.Length-1;
+                        System.Console.WriteLine("1");
                         Database.CadastrarUsuario(tamanho);
                         Array.Resize(ref Database.usuarios,tamanho+1);
                         break;

@@ -2,6 +2,7 @@ using Senai.Exercicio.Pizzaria.Classes.Utilidades;
 
 namespace Senai.Exercicio.Pizzaria.Classes.Models {
     public class Usuario : Entidade {
+        private string email;
         /// <summary>
         /// [Encapsulado]
         /// </summary>
@@ -13,27 +14,26 @@ namespace Senai.Exercicio.Pizzaria.Classes.Models {
 
             set {
                 if (value.Contains ('@') && value.Contains ('.')) {
-                    Email = value;
+                    email = value;
                 } else {
                     Design.MensagemErro ("Email invalido"); //ARRUMA SABOSTA
-                    Email = null;
                 }
             }
         }
+        private string senha ;
         /// <summary>
         /// [Encapsulado]
         /// </summary>
         /// <value>O Valor apenas é aceito quando contem mais de 6 caracteres</value>
         public string Senha {
             get {
-                return Senha;
+                return senha;
             }
             set {
                 if (value.Length > 6) {
-                    Senha = value;
+                    senha = value;
                 } else {
                     Design.MensagemErro ("Senha invalida (contém menos de 6 caracteres)");
-                    Senha = null;
                 }
             }
         }

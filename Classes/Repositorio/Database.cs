@@ -169,9 +169,11 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         /// </summary>
         /// <param name="id">Posição do usuario no vetor somada mais 1</param>
         public static void CadastrarUsuario (int id) {
+            System.Console.WriteLine("2");
             usuarios[id] = new Usuario ();
             usuarios[id].ID = id; //seta o id do cadastro igual ao inserido pelo usuario
 
+            System.Console.WriteLine("3");
             Design.MensagemInstrucao ("Insira o seu nome");
             usuarios[id].Nome = Console.ReadLine ();
             //  LOOP EMAIL
