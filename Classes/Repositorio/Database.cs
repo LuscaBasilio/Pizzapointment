@@ -170,7 +170,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         /// <param name="id">Posição do usuario no vetor somada mais 1</param>
         public static void CadastrarUsuario (int id) {           
             usuarios[id] = new Usuario ();
-            usuarios[id].ID = id; //seta o id do cadastro igual ao inserido pelo usuario
+            usuarios[id].ID = id+1; 
 
             Design.MensagemInstrucao ("Insira o seu nome");
             usuarios[id].Nome = Console.ReadLine ();
@@ -187,9 +187,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
             //  Data de criação
             usuarios[id].DataCriacao =  DateTime.Now.ToShortDateString();
 
-            RegistrarUsuario(usuarios[id]);
-
-            Design.MensagemSucesso ($"Usuario {usuarios[id].Nome} cadastrado com sucesso no id {id}");       
+            Design.MensagemSucesso ($"Usuario {usuarios[id].Nome} cadastrado com sucesso no id {id+1}");       
         }
         /// <summary>
         /// Metodo no qual pede os dados e verifica se o mesmo está cadastrado no banco de dados.
@@ -200,16 +198,20 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
 
             foreach (Usuario item in usuarios) {
                 if (item.Email == email) {
-                    Design.MensagemInstrucao ("Insira a senha");
-                    string senha = Console.ReadLine ();
-
                     sbyte tentativas = 0;
+
+                    Design.MensagemInstrucao ("Insira a senha");
+                    string senha = Console.ReadLine ();                    
+
                     // loop de tentativas
-                    do {
-                        Design.MensagemErro ("Senha invalida . Insira novamente");
+                    while (senha != item.Senha && tentativas < 3) {
+                        Design.MensagemErro ("Senha invalida , Insira novamente");
                         senha = Console.ReadLine ();
-                        if (senha != item.Senha) tentativas++;
-                    } while (senha != item.Senha || tentativas >= 3);
+                        if (senha != item.Senha)
+                            tentativas++;      
+                        else    
+                            break;
+                    }
 
                     // verificação de segurança , caso os erros ultrapassem o 3
                     if (tentativas > 3) {
@@ -243,7 +245,8 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
                     usuarioLogado = null;
                     break;
                 case 2:
-                    //Merda nenhuma acontece
+                    Console.WriteLine("Aperte qualquer tecla para continuar");
+                    Console.ReadKey();
                     break;
                 default:
                     break;
@@ -255,19 +258,20 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         #region Ambos
 
             /// <summary>
-            /// Percorre toda a array inserida pelo usuario e usa o metodo Design.Listar para mostrar resultados
+            /// Percorre toda a array inserida pelo usuario e usa o metodo Design.ListarUsuario||Design.ListarUsuario para mostrar resultados
             /// </summary>
-            /// <param name="database"></param>
+            /// <param name="database">Banco de dados que será listado</param>
             /// <param name="valor">tipo do produto/usuario a ser mostrada</param>
             public static void ListarTodos(Entidade[] database,string valor = "entidade"){
                 if(database[0] != null){
                     foreach (Entidade item in database)
                     {
                         if(item != null){
-                            Design.Listar(item.ID,database);
-                        }
-                        else{
-                            Design.MensagemErro($"Não existe {valor} nesse ID");
+                                if(valor == "produto"){
+                                    Design.ListarProduto(item.ID);
+                                }else if(valor == "usuario"){
+                                    Design.ListarUsuario(item.ID);
+                                }
                         }
                     }
                 }else{
@@ -277,14 +281,20 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         #endregion
 
         #region Stream
-            public static StreamWriter usuarioDB = new StreamWriter("UsuarioDB.txt");
-
             /// <summary>
             /// Abra o arquivo UsuarioDB.txt e adiciona informações do usuario lá 
             /// Separados por espaço , uma linha para cada usuario
             /// </summary>
             /// <param name="item"></param>
-            private static void RegistrarUsuario(Usuario item) => usuarioDB.WriteLine($"{item.ID}#{item.Nome}#{item.Email}#{item.Senha}#{item.DataCriacao}");
+            public static void RegistrarUsuarios() {
+                StreamWriter usuarioDB = new StreamWriter("UsuarioDB.txt");
+                foreach (var item in usuarios){
+                    if(item!=null){
+                        usuarioDB.WriteLine($"{item.ID}\n{item.Nome}\n{item.Email}\n{item.Senha}\n{item.DataCriacao}");
+                    }
+                }
+                usuarioDB.Close();               
+            }
             
             /// <summary>
             /// Percorre cada linha do arquivo .txt , e a divide em uma array de string sendo :  
@@ -300,16 +310,14 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
                 StreamReader usuarioDB_ = new StreamReader("UsuarioDB.txt");
                 int contador = 0;
                 while(!usuarioDB_.EndOfStream){
-                    string linha = usuarioDB_.ReadLine();
-                    if(linha !=null){
-                        string[] valores = linha.Split('#',5);
-                        NovoDatabase[contador] = new Usuario();
-                        NovoDatabase[contador].ID = int.Parse(valores[0]);
-                        NovoDatabase[contador].Nome = valores[1];
-                        NovoDatabase[contador].Email = valores[2];
-                        NovoDatabase[contador].Senha = valores[3];
-                        NovoDatabase[contador].DataCriacao = valores[4];
-                    }
+                    NovoDatabase[contador] = new Usuario();
+                    NovoDatabase[contador].ID = int.Parse(usuarioDB_.ReadLine());
+                    NovoDatabase[contador].Nome = usuarioDB_.ReadLine();
+                    NovoDatabase[contador].Email = usuarioDB_.ReadLine();
+                    NovoDatabase[contador].Senha = usuarioDB_.ReadLine();
+                    NovoDatabase[contador].DataCriacao = usuarioDB_.ReadLine();
+                    contador++;
+                    Array.Resize(ref NovoDatabase,contador+1);
                 }
                 usuarioDB_.Close();
                 return NovoDatabase;

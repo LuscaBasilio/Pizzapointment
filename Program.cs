@@ -21,7 +21,8 @@ namespace Senai.Exercicio.Pizzaria
 
             }while(sair == false);
 
-            Database.usuarioDB.Close();           
+           Database.RegistrarUsuarios();
+                      
         }
 
     }

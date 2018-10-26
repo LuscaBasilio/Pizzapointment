@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Senai.Exercicio.Pizzaria.Classes.Models;
+using Senai.Exercicio.Pizzaria.Classes.Repositorio;
 
 namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
     /// <summary>
@@ -43,13 +44,20 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades {
         }
         /// <summary>
         /// Pode ser usado sem depender do metodo Database.ListarTodos
-        /// Procura um produto/usuario no banco de dados fornecido e mostra o ID e o nome.  
-        /// Caso seja um produto ele mostra sua descrição , caso seja um usuario ,seu email.
+        /// Procura um usuario no banco de dados e mostra o ID , nome , email e data de criação.  
         /// </summary>
-        /// <param name="id">Parametro inserido pelo usuario , define qual produto/usuario será procurado</param>
-        /// <param name="database">database onde será procurado a produto/usuario</param>
-        public static void Listar(int id,Entidade[] database){               
-            Console.WriteLine($"--> [{id}] : {database[id-1].Nome}");         
+        /// <param name="id">Parametro inserido pelo usuario , define qual usuario será procurado</param>
+        public static void ListarUsuario(int id){               
+            Console.WriteLine($"\n[{id}] --> {Database.usuarios[id-1].Nome}\nEmail --> {Database.usuarios[id-1].Email}\nData De Criação --> {Database.usuarios[id-1].DataCriacao}");         
+        }
+
+        /// <summary>
+        /// Pode ser usado sem depender do metodo Database.ListarTodos
+        /// Procura um produto no banco de dados e mostra o ID e o nome.  
+        /// </summary>
+        /// <param name="id">Parametro inserido pelo usuario , define qual usuario será procurado</param>
+        public static void ListarProduto(int id){               
+            Console.WriteLine($"\n[{id}] --> {Database.produto[id-1].Nome}\n Tipo --> \nDescrição :\n{Database.produto[id-1].Descricao}");         
         }
     }
 }
