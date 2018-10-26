@@ -1,6 +1,6 @@
 ﻿using System;
 using Senai.Exercicio.Pizzaria.Classes.Repositorio;
-using Senai.Exercicio.Pizzaria.Classes.Utilidades;
+using Senai.Exercicio.Pizzaria.Classes.Models;
 
 namespace Senai.Exercicio.Pizzaria
 {
@@ -9,6 +9,7 @@ namespace Senai.Exercicio.Pizzaria
         static void Main(string[] args){ 
             
             Database.usuarios = Database.CarregarUsuarios();
+            Database.produto = Database.CarregarProdutos();
 
             bool sair = false;
             
@@ -22,6 +23,7 @@ namespace Senai.Exercicio.Pizzaria
             }while(sair == false);
 
            Database.RegistrarUsuarios();
+           Database.RegistrarProdutos();
                       
         }
 

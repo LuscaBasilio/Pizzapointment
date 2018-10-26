@@ -16,8 +16,8 @@ namespace Senai.Exercicio.Pizzaria.Classes.Models
                 return preco;
             }
             set{
-                if(value>0){
-                    Senai.Exercicio.Pizzaria.Classes.Utilidades.Design.MensagemErro("O Preoço do produto não pode ser igual ou menor do que 0");
+                if(value<=0){
+                    Senai.Exercicio.Pizzaria.Classes.Utilidades.Design.MensagemErro("O Preço do produto não pode ser igual ou menor do que 0");
                 }else{
                     preco = value;
                 }

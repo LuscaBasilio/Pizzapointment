@@ -3,7 +3,7 @@ using Senai.Exercicio.Pizzaria.Classes;
 using Senai.Exercicio.Pizzaria.Classes.Repositorio;
 using Senai.Exercicio.Pizzaria.Classes.Utilidades;
 
-namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
+namespace Senai.Exercicio.Pizzaria.Classes.Models
 {
     /// <summary>
     /// Classe onde tem toda interface do programa
@@ -27,8 +27,8 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
             sbyte escolha = 0 ;
             bool sair = false;
             // se o usuario não estiver logado 
-            do{       
-                Console.WriteLine("");       
+            do{            
+                Console.WriteLine("");
                 Design.MensagemInstrucao("O que deseja fazer?");
                 Console.WriteLine("[1] Cadastrar usuario\n[2] Efetuar login\n[3] Listar Usuarios\n[9] Salvar e Sair\n");        
                 sbyte.TryParse(Console.ReadLine(),out escolha);
@@ -72,43 +72,48 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
         /// </summary>
         public static void Logado(){
             sbyte escolha;
-            sbyte.TryParse(Console.ReadLine(),out escolha);
-            Console.WriteLine("O que deseja fazer agora?");   
-            Console.WriteLine("[1] Cadastrar produto\n[2] Listar produto\n[3] Exibir total\n[4] Maior preço\n[5] Menor preço\n[6] Alterar preço\n[9] Fazer Logoff");
-            switch(escolha){
-                case 1://   Cadastrar Produto//
-                    // cria uma variavel com o tamanho do database dos produtos menos 1.
-                    int tamanhoProduto = Database.produto.Length-1;
-                    // chama um metodo (cadastrar produto)
-                    Database.CadastrarProduto(tamanhoProduto);
-                    // aumenta a array usando a variavel de tamanho mais um
-                    Array.Resize(ref Database.produto,tamanhoProduto+1);
-                    break;
-                case 2://   Listar Produto(s)//
-                    ListarProdutos();    
-                    break;
-                case 3://   Exibir Total    //
-                    Database.ExibirTotal();
-                    break;
-                case 4://   Maior Preço     //
-                    Database.MaiorPreco();
-                    break;
-                case 5://   Menor Preço     //
-                    Database.MenorPreco();
-                    break;
-                case 6://   Alterar Preço   //
-                    int id;
-                    Design.MensagemInstrucao("Insira o ID do produto que você deseja alterar o valor");
-                    int.TryParse(Console.ReadLine(),out id);
-                    Database.AlterarPreco(id);
-                    break;
-                case 9://   Logoff          //
-                    Database.Logoff();
-                    escolha = 0 ;
-                    break;
-                default:
-                    break;
-            }
+            do{
+                Console.WriteLine("");
+                Console.WriteLine("O que deseja fazer agora?");   
+                Console.WriteLine("[1] Cadastrar produto\n[2] Listar produto\n[3] Exibir total\n[4] Maior preço\n[5] Menor preço\n[6] Alterar preço\n[9] Fazer Logoff");
+                sbyte.TryParse(Console.ReadLine(),out escolha);
+                switch(escolha){
+                    case 1://   Cadastrar Produto//
+                        // cria uma variavel com o tamanho do database dos produtos menos 1.
+                        int tamanhoProduto = Database.produto.Length-1;
+                        // chama um metodo (cadastrar produto)
+                        Database.CadastrarProduto(tamanhoProduto);
+                        // aumenta a array usando a variavel de tamanho mais um
+                        Array.Resize(ref Database.produto,tamanhoProduto+1);
+                        break;
+                    case 2://   Listar Produto(s)//
+                        ListarProdutos();    
+                        break;
+                    case 3://   Exibir Total    //
+                        Console.WriteLine($"O custo total de todos os produtos é R${Database.ExibirTotal()}");
+                        break;
+                    case 4://   Maior Preço     //
+                        int maior = Database.MaiorPreco();
+                        Console.WriteLine($"O Produto com o maior preço é o {Database.produto[maior-1].Nome} no id {maior}");
+                        break;
+                    case 5://   Menor Preço     //
+                        int menor = Database.MenorPreco();
+                        Console.WriteLine($"O Produto com o menor preço é o {Database.produto[menor].Nome} no id {menor}");
+                        break;
+                    case 6://   Alterar Preço   //
+                        int id;
+                        Console.WriteLine("");
+                        Design.MensagemInstrucao("Insira o ID do produto que você deseja alterar o valor");
+                        int.TryParse(Console.ReadLine(),out id);
+                        Database.AlterarPreco(id);
+                        break;
+                    case 9://   Logoff          //
+                        Database.Logoff();
+                        break;
+                    default:
+                        break;
+                }
+            }while(escolha != 9);
         }
         /// <summary>
         /// [Redirecionado e usado apenas pelo metodo Menu.Logado]
@@ -121,6 +126,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Utilidades
         private static void ListarProdutos(){
             sbyte esx = 0;
             do{//escolher opções
+                Console.WriteLine("");
                 Design.MensagemInstrucao("O que você deseja fazer agora?");
                 Console.WriteLine("[1] Listar todos os produtos\n[2] Listar um produto especifico\n[3] Sair");
                 sbyte.TryParse(Console.ReadLine(),out esx);

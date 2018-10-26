@@ -28,7 +28,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         ///<param name="id">Posição do usuario no vetor</param>
         public static void CadastrarProduto (int id) {
             produto[id] = new Produto ();
-            produto[id].ID = id;
+            produto[id].ID = id+1;
             
             Design.MensagemInstrucao ("Insira o nome do produto");
             produto[id].Nome = Console.ReadLine ();
@@ -44,7 +44,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
             Design.MensagemInstrucao ("Indique a qual categoria o produto pertence");
             produto[id].Categoria = SetCategoria();
 
-            produto[id].DataCriacao =  DateTime.Now.Date.ToString();
+            produto[id].DataCriacao =  DateTime.Now.ToShortDateString();
 
             Design.MensagemSucesso($"Produto {produto[id].Nome} registrado com sucesso no id {id}!");
         
@@ -78,7 +78,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
         /// <summary>
         /// Define o total do custo de todos os produtos no banco de dados
         /// </summary>
-        public static void ExibirTotal () {
+        public static double ExibirTotal () {
             double total = 0;
             foreach (Produto item in produto)
             {
@@ -87,6 +87,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
                 else
                     continue;
             }
+            return total;
         }
         /// <summary>
         /// Procura o maior valor e armazena o seu id em uma variavel temporaria na qual será o retorno desse metodo.
@@ -145,118 +146,164 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
 
             Design.MensagemSucesso($"O Preço do produto {produto[id-1]} foi alterado de R${valorAntigo} para {produto[id-1].Preco}");
         }
+        /// <summary>
+            /// Abra o arquivo UsuarioDB.txt e adiciona informações do usuario lá 
+            /// Separados por espaço , uma linha para cada usuario
+            /// </summary>
+            /// <param name="item"></param>
+            public static void RegistrarProdutos() {
+                StreamWriter usuarioDB = new StreamWriter("ProdutoDB.txt");
+                foreach (var item in produto){
+                    if(item!=null){
+                        usuarioDB.WriteLine($"{item.ID}\n{item.Nome}\n{item.Categoria}\n{item.Preco}\n{item.Descricao}\n{item.DataCriacao}");
+                    }
+                }
+                usuarioDB.Close();               
+            }
+            
+            /// <summary>
+            /// Percorre cada linha do arquivo .txt , e a divide em uma array de string sendo :  
+            /// index 0 : ID
+            /// index 1 : Nome
+            /// index 2 : Categoria
+            /// index 3 : Preço
+            /// index 4 : Descrição
+            /// index 5 : Data de criação
+            /// </summary>
+            /// <returns>Retorna um database importado de um arquivo .txt</returns>
+            public static Produto[] CarregarProdutos(){
+                Produto[] NovoDatabase = new Produto[1]{null};
+                StreamReader ProdutoDB = new StreamReader("ProdutoDB.txt");
+                int contador = 0;
+                while(!ProdutoDB.EndOfStream){
+                    NovoDatabase[contador] = new Produto(){
+                        ID = int.Parse(ProdutoDB.ReadLine()),
+                        Nome = ProdutoDB.ReadLine(),
+                        Categoria = ProdutoDB.ReadLine(),
+                        Preco = double.Parse(ProdutoDB.ReadLine()),
+                        Descricao = ProdutoDB.ReadLine(),
+                        DataCriacao = ProdutoDB.ReadLine()  
+                    };
+                    contador++;
+                    Array.Resize(ref NovoDatabase,contador+1);
+                }
+                ProdutoDB.Close();
+                return NovoDatabase;
+            }
         #endregion Metodos
         #endregion Produto
 
         #region Usuario
         #region Variaveis
-        /// <summary>
-        /// Array que contem todos os usuarios cadastrados
-        /// </summary>
-        public static Usuario[] usuarios = new Usuario[1];
-        /// <summary>
-        /// Usuario logado atualmente
-        /// </summary>
-        public static Usuario usuarioLogado = null;
+            /// <summary>
+            /// Array que contem todos os usuarios cadastrados
+            /// </summary>
+            public static Usuario[] usuarios = new Usuario[1];
+            /// <summary>
+            /// Usuario logado atualmente
+            /// </summary>
+            public static Usuario usuarioLogado = null;
         #endregion Variaveis
 
         #region Metodos
-        /// <summary>
-        /// Insere um usuario no ultimo index do vetor.  
-        /// Condições :  
-        /// O Usuario deve conter um email com @ e .  
-        /// A senha do usuario deve conter mais do que 6 caracteres
-        /// </summary>
-        /// <param name="id">Posição do usuario no vetor somada mais 1</param>
-        public static void CadastrarUsuario (int id) {           
-            usuarios[id] = new Usuario ();
-            usuarios[id].ID = id+1; 
+            /// <summary>
+            /// Insere um usuario no ultimo index do vetor.  
+            /// Condições :  
+            /// O Usuario deve conter um email com @ e .  
+            /// A senha do usuario deve conter mais do que 6 caracteres
+            /// </summary>
+            /// <param name="id">Posição do usuario no vetor somada mais 1</param>
+            public static void CadastrarUsuario (int id) {           
+                usuarios[id] = new Usuario ();
+                usuarios[id].ID = id+1; 
 
-            Design.MensagemInstrucao ("Insira o seu nome");
-            usuarios[id].Nome = Console.ReadLine ();
-            //  LOOP EMAIL
-            Design.MensagemInstrucao ("Insira um email (Ex: email@provedor.com)");
-            do {
-                usuarios[id].Email = Console.ReadLine ();
-            } while (usuarios[id].Email == null);
-            //  LOOP SENHA
-            Design.MensagemInstrucao ("Insira uma senha");
-            do {
-                usuarios[id].Senha = Console.ReadLine ();
-            } while (usuarios[id].Senha == null);
-            //  Data de criação
-            usuarios[id].DataCriacao =  DateTime.Now.ToShortDateString();
+                Design.MensagemInstrucao ("Insira o seu nome");
+                usuarios[id].Nome = Console.ReadLine ();
+                //  LOOP EMAIL
+                Design.MensagemInstrucao ("Insira um email (Ex: email@provedor.com)");
+                do {
+                    usuarios[id].Email = Console.ReadLine ();
+                } while (usuarios[id].Email == null);
+                //  LOOP SENHA
+                Design.MensagemInstrucao ("Insira uma senha");
+                do {
+                    usuarios[id].Senha = Console.ReadLine ();
+                } while (usuarios[id].Senha == null);
+                //  Data de criação
+                usuarios[id].DataCriacao =  DateTime.Now.ToShortDateString();
 
-            Design.MensagemSucesso ($"Usuario {usuarios[id].Nome} cadastrado com sucesso no id {id+1}");       
-        }
-        /// <summary>
-        /// Metodo no qual pede os dados e verifica se o mesmo está cadastrado no banco de dados.
-        /// </summary>
-        public static void EfetuarLogin () {
-            Design.MensagemInstrucao ("Insira o seu email");
-            string email = Console.ReadLine ();
+                Design.MensagemSucesso ($"Usuario {usuarios[id].Nome} cadastrado com sucesso no id {id+1}");       
+            }
+            /// <summary>
+            /// Metodo no qual pede os dados e verifica se o mesmo está cadastrado no banco de dados.
+            /// </summary>
+            public static void EfetuarLogin () {
+                bool emailEncontrado = false;
+                Design.MensagemInstrucao ("Insira o seu email");
+                string email = Console.ReadLine ();
 
-            foreach (Usuario item in usuarios) {
-                if (item.Email == email) {
-                    sbyte tentativas = 0;
+                foreach (Usuario item in usuarios) {
+                    if(item!=null){
+                        if (item.Email == email) {
+                            sbyte tentativas = 0;
 
-                    Design.MensagemInstrucao ("Insira a senha");
-                    string senha = Console.ReadLine ();                    
+                            Design.MensagemInstrucao ("Insira a senha");
+                            string senha = Console.ReadLine ();                    
 
-                    // loop de tentativas
-                    while (senha != item.Senha && tentativas < 3) {
-                        Design.MensagemErro ("Senha invalida , Insira novamente");
-                        senha = Console.ReadLine ();
-                        if (senha != item.Senha)
-                            tentativas++;      
-                        else    
+                            // loop de tentativas
+                            while (senha != item.Senha && tentativas < 3) {
+                                Design.MensagemErro ("Senha invalida , Insira novamente");
+                                senha = Console.ReadLine ();
+                                if (senha != item.Senha)
+                                    tentativas++;      
+                                else    
+                                    break;
+                            }
+
+                            // verificação de segurança , caso os erros ultrapassem o 3
+                            if (tentativas > 3) {
+                                Design.MensagemErro ("Maximo de tentativas atingido.");
+                                break;
+                            } else {
+                                if (usuarioLogado == null) {
+                                    usuarioLogado = item;
+                                    emailEncontrado = true;
+                                } else {
+                                    Design.MensagemErro ("Você ja está logado.");
+                                    Logoff ();
+                                }
+                            }
                             break;
-                    }
-
-                    // verificação de segurança , caso os erros ultrapassem o 3
-                    if (tentativas > 3) {
-                        Design.MensagemErro ("Maximo de tentativas atingido.");
-                        break;
-                    } else {
-                        if (usuarioLogado == null) {
-                            usuarioLogado = item;
-                        } else {
-                            Design.MensagemErro ("Você ja está logado.");
-                            Logoff ();
                         }
                     }
-                    break;
+                }
+                if(!emailEncontrado)Console.WriteLine("O Email inserido não existe");
+            }
+            /// <summary>
+            /// Desloga o usuario caso esteja logado
+            /// </summary>
+            public static void Logoff () {
+                Console.WriteLine("");
+                Design.MensagemInstrucao ("Deseja deslogar?");
+                Console.WriteLine ("[1] SIM\n[2] NÃO");
+
+                sbyte escolha;
+                sbyte.TryParse (Console.ReadLine (), out escolha);
+
+                switch (escolha) {
+                    case 1:
+                        Design.MensagemSucesso ("Você deslogou com sucesso");
+                        usuarioLogado = null;
+                        break;
+                    case 2:
+                        Console.WriteLine("Aperte qualquer tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                    default:
+                        break;
                 }
             }
-        }
-        /// <summary>
-        /// Desloga o usuario caso esteja logado
-        /// </summary>
-        public static void Logoff () {
-            Design.MensagemInstrucao ("Deseja deslogar?");
-            Console.WriteLine ("[1] SIM\n[2] NÃO");
-
-            sbyte escolha;
-            sbyte.TryParse (Console.ReadLine (), out escolha);
-
-            switch (escolha) {
-                case 1:
-                    Design.MensagemSucesso ("Você deslogou com sucesso");
-                    usuarioLogado = null;
-                    break;
-                case 2:
-                    Console.WriteLine("Aperte qualquer tecla para continuar");
-                    Console.ReadKey();
-                    break;
-                default:
-                    break;
-                }
-            }
-            #endregion Metodos
-        #endregion Usuario
-
-        #region Ambos
-
+            
             /// <summary>
             /// Percorre toda a array inserida pelo usuario e usa o metodo Design.ListarUsuario||Design.ListarUsuario para mostrar resultados
             /// </summary>
@@ -278,9 +325,6 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
                     Design.MensagemErro("O banco de dados está vazio");
                 }            
             }
-        #endregion
-
-        #region Stream
             /// <summary>
             /// Abra o arquivo UsuarioDB.txt e adiciona informações do usuario lá 
             /// Separados por espaço , uma linha para cada usuario
@@ -288,7 +332,7 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
             /// <param name="item"></param>
             public static void RegistrarUsuarios() {
                 StreamWriter usuarioDB = new StreamWriter("UsuarioDB.txt");
-                foreach (var item in usuarios){
+                foreach (Usuario item in usuarios){
                     if(item!=null){
                         usuarioDB.WriteLine($"{item.ID}\n{item.Nome}\n{item.Email}\n{item.Senha}\n{item.DataCriacao}");
                     }
@@ -310,18 +354,20 @@ namespace Senai.Exercicio.Pizzaria.Classes.Repositorio {
                 StreamReader usuarioDB_ = new StreamReader("UsuarioDB.txt");
                 int contador = 0;
                 while(!usuarioDB_.EndOfStream){
-                    NovoDatabase[contador] = new Usuario();
-                    NovoDatabase[contador].ID = int.Parse(usuarioDB_.ReadLine());
-                    NovoDatabase[contador].Nome = usuarioDB_.ReadLine();
-                    NovoDatabase[contador].Email = usuarioDB_.ReadLine();
-                    NovoDatabase[contador].Senha = usuarioDB_.ReadLine();
-                    NovoDatabase[contador].DataCriacao = usuarioDB_.ReadLine();
+                    NovoDatabase[contador] = new Usuario(){
+                        ID = int.Parse(usuarioDB_.ReadLine()),
+                        Nome = usuarioDB_.ReadLine(),
+                        Email = usuarioDB_.ReadLine(),
+                        Senha = usuarioDB_.ReadLine(),
+                        DataCriacao = usuarioDB_.ReadLine()
+                    };
                     contador++;
                     Array.Resize(ref NovoDatabase,contador+1);
                 }
                 usuarioDB_.Close();
                 return NovoDatabase;
             }
-        #endregion Stream
+            #endregion Metodos
+        #endregion Usuario
     }
 }
